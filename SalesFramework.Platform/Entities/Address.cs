@@ -12,6 +12,9 @@ namespace SalesFramework.Platform.Model
     {
         #region Fields
         //Street field.
+        private System.Int64 _userID;
+
+        //Street field.
         private System.String _street;
 
         //Street number field.
@@ -40,15 +43,17 @@ namespace SalesFramework.Platform.Model
         /// Constructor for the Address class.
         /// </summary>
         /// <param name="ID">The address id.</param>
+        /// <param name="UserID">The User id.</param>
         /// <param name="Street">The address street.</param>
         /// <param name="Number">The residence number.</param>
         /// <param name="Adjunct">The address adjunct information.</param>
         /// <param name="PostalCode">The address postal code.</param>
         /// <param name="City">The city of residency.</param>
         /// <param name="State">The state of residency.</param>
-        public Address(System.Int64 ID, System.String Street, System.String Number, System.String Adjunct, System.String PostalCode, System.String City, System.String State)
+        public Address(System.Int64 ID, System.Int64 UserID, System.String Street, System.String Number, System.String Adjunct, System.String PostalCode, System.String City, System.String State)
         {
             this._ID = ID;
+            this._userID = UserID;
             this._street = Street;
             this._number = Number;
             this._adjunct = Adjunct;
@@ -59,6 +64,28 @@ namespace SalesFramework.Platform.Model
         #endregion Constructors
 
         #region Properties
+        /// <summary>
+        /// Gets or Sets the valid UserID property of the Address instance.
+        /// </summary>
+        public System.Int64 UserID
+        {
+            get
+            {
+                return this._userID;
+            }
+            set
+            {
+                if (value > 0)
+                {
+                    this._userID = UserID;
+                }
+                else
+                {
+                    throw new InvalidOperationException("Property UserID must be a valid user ID.");
+                }
+            }
+        }
+
         /// <summary>
         /// Gets or sets the valid Street property of the Address instance.
         /// </summary>

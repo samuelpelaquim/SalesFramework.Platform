@@ -11,6 +11,9 @@ namespace SalesFramework.Platform.Model
     public class Cart : Base
     {
         #region Fields
+        //Street field.
+        private System.Int64 _userID;
+
         //Shipping cost field.
         private System.Decimal _shipping;
 
@@ -30,15 +33,38 @@ namespace SalesFramework.Platform.Model
         /// <param name="ID">The cart ID.</param>
         /// <param name="Shipping">The shipping cost.</param>
         /// <param name="Products">The products/amount dictionary.</param>
-        public Cart(System.Int64 ID, System.Decimal Shipping, Dictionary<Product, System.Int16> Products)
+        public Cart(System.Int64 ID, System.Int64 UserID, System.Decimal Shipping, Dictionary<Product, System.Int16> Products)
         {
             this._ID = ID;
+            this._userID = UserID;
             this._shipping = Shipping;
             this._products = Products;
         }
         #endregion Constructors
 
         #region Properties
+        /// <summary>
+        /// Gets or Sets the valid UserID property of the Cart instance.
+        /// </summary>
+        public System.Int64 UserID
+        {
+            get
+            {
+                return this._userID;
+            }
+            set
+            {
+                if (value > 0)
+                {
+                    this._userID = UserID;
+                }
+                else
+                {
+                    throw new InvalidOperationException("Property UserID must be a valid user ID.");
+                }
+            }
+        }
+
         /// <summary>
         /// Gets or sets the Shipping cost property of the Cart instance.
         /// </summary>
