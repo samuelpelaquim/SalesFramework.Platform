@@ -1,6 +1,6 @@
-﻿using System;
+﻿using SalesFramework.Platform.Entities;
+using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace SalesFramework.Platform.Model
 {
@@ -18,6 +18,9 @@ namespace SalesFramework.Platform.Model
 
         //Product discount field.
         private System.Decimal _discount;
+
+        //Product category field.
+        private Category _category;
 
         //Product characteristics field.
         private Dictionary<System.String, System.Object> _characteristics;
@@ -38,13 +41,15 @@ namespace SalesFramework.Platform.Model
         /// <param name="ID">The product ID.</param>
         /// <param name="Name">The product name.</param>
         /// <param name="Price">The product price.</param>
+        /// <param name="Category">The product category.</param>
         /// <param name="Characteristics">The Dictionary of Product characteristics.</param>
         /// <param name="Images">The List of Product images.</param>
-        public Product(System.Int64 ID, System.String Name, System.Decimal Price, Dictionary<System.String, System.Object> Characteristics, List<System.String> Images)
+        public Product(System.Int64 ID, System.String Name, System.Decimal Price, Category Category, Dictionary<System.String, System.Object> Characteristics, List<System.String> Images)
         {
             this._ID = ID;
             this._name = Name;
             this._price = Price;
+            this._category = Category;
             this._characteristics = Characteristics;
             this._images = Images;
         }
@@ -118,6 +123,28 @@ namespace SalesFramework.Platform.Model
         }
 
         /// <summary>
+        /// Gets or sets the valid Category property of the Product instance.
+        /// </summary>
+        public Category Category
+        {
+            get
+            {
+                return this._category;
+            }
+            set
+            {
+                if (value is Category)
+                {
+                    this._category = value;
+                }
+                else
+                {
+                    throw new InvalidOperationException("Property Category must be a valid Category object.");
+                }
+            }
+        }
+
+        /// <summary>
         /// Gets or sets the Product Characteristics for this instance of Product class.
         /// </summary>
         public Dictionary<System.String, System.Object> Characteristics
@@ -175,6 +202,7 @@ namespace SalesFramework.Platform.Model
 
             return other.Name == this._name &&
                     other.Price == this._price &&
+                    other.Category == this._category &&
                     other.Characteristics == this._characteristics;
         }
 
@@ -210,6 +238,8 @@ namespace SalesFramework.Platform.Model
 
                 var nameHashCode = !System.String.IsNullOrEmpty(_name) ? _name.GetHashCode() : 0;
                 hashCode = (hashCode * 397) ^ nameHashCode;
+
+                hashCode = (hashCode * 397) ^ _category.GetHashCode();
 
                 hashCode = (hashCode * 397) ^ _characteristics.GetHashCode();
 

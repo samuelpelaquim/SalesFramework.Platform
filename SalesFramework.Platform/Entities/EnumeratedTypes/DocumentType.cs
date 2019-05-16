@@ -4,6 +4,9 @@ using System.Text;
 
 namespace SalesFramework.Platform.Model.EnumeratedTypes
 {
+    /// <summary>
+    /// Defines the document type.
+    /// </summary>
     public enum DocumentType
     {
         CPF = 1,

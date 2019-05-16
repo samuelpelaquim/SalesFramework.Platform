@@ -23,7 +23,14 @@ namespace SalesFramework.Platform.Model
             }
             set
             {
-                this._ID = value;
+                if (value > 0)
+                {
+                    this._ID = value;
+                }
+                else
+                {
+                    throw new InvalidOperationException("Property ID must be a non-negative valid user ID.");
+                }
             }
         }
     }
