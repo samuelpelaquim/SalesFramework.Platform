@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace SalesFramework.Platform.Entities
 {
     /// <summary>
-    /// 
+    /// Class that represents a Promotion object.
     /// </summary>
     public class Promotion : Base
     {
@@ -76,8 +76,9 @@ namespace SalesFramework.Platform.Entities
         }
         #endregion Constructors
 
+        #region Properties
         /// <summary>
-        /// Gets or sets the valid Name property of the Promotion instance.
+        /// Gets or sets the valid Name property of the Promotion object instance.
         /// </summary>
         public System.String Name
         {
@@ -99,7 +100,7 @@ namespace SalesFramework.Platform.Entities
         }
 
         /// <summary>
-        /// Gets or sets the valid Cupom property of the Promotion instance.
+        /// Gets or sets the valid Cupom property of the Promotion object instance.
         /// </summary>
         public System.String Cupom
         {
@@ -121,7 +122,7 @@ namespace SalesFramework.Platform.Entities
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets the valid Start Date property of the Promotion object instance.
         /// </summary>
         public System.DateTime StartDate
         {
@@ -131,71 +132,116 @@ namespace SalesFramework.Platform.Entities
             }
             set
             {
-                if (value < System.DateTime.Today)
+                if (value < this._endDate)
                 {
                     this._startDate = value;
                 }
                 else
                 {
-                    throw new InvalidOperationException("Property StartDate can't be a date in the past.");
+                    throw new InvalidOperationException("Property StartDate can't be a later date than Property EndDate.");
                 }
             }
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets the valid End Date property of the Promotion object instance.
         /// </summary>
         public System.DateTime EndDate
         {
-            get;
-            set;
+            get
+            {
+                return this._endDate;
+            }
+            set
+            {
+                if (value > this._startDate)
+                {
+                    this._endDate = value;
+                }
+                else
+                {
+                    throw new InvalidOperationException("Property EndDate can't be a date earlier than Property StartDate.");
+                }
+            }
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets the Condition Type property of the Promotion object instance.
         /// </summary>
         public PromotionConditionType Condition
         {
-            get;
-            set;
+            get
+            {
+                return this._condition;
+            }
+            set
+            {
+                this._condition = value;
+            }
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets the Operator Type property of the Promotion object instance.
         /// </summary>
         public PromotionOperatorType Operator
         {
-            get;
-            set;
+            get
+            {
+                return this._operator;
+            }
+            set
+            {
+                this._operator = value;
+            }
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets the Action Type property of the Promotion object instance.
         /// </summary>
         public PromotionActionType Action
         {
-            get;
-            set;
+            get
+            {
+                return this._action;
+            }
+            set
+            {
+                this._action = value;
+            }
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets the Condition Arguments property of the Promotion object instance.
         /// </summary>
         public Dictionary<System.String, System.Object> ConditionArgs
         {
-            get;
-            set;
+            get
+            {
+                return this._conditionArgs;
+            }
+            set
+            {
+                this._conditionArgs = value;
+            }
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets the Action Arguments property of the Promotion object instance.
         /// </summary>
         public Dictionary<System.String, System.Object> ActionArgs
         {
-            get;
-            set;
+            get
+            {
+                return this._actionArgs;
+            }
+            set
+            {
+                this._actionArgs = value;
+            }
         }
+        #endregion Properties
 
-
+        #region Methods
+        #endregion Methods
     }
 }

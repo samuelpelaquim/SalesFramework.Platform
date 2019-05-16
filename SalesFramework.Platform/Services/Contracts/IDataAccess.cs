@@ -5,9 +5,9 @@ using System.Text;
 namespace SalesFramework.Platform.Services.Contracts
 {
     /// <summary>
-    /// 
+    /// Generic Interface defining Create/Update/Read/Delete operations.
     /// </summary>
-    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="T">The Type Parameter of the object to be queried.</typeparam>
     public interface IDataAccess<T>
     {
         T SelectSingle(System.Int64 ID);
